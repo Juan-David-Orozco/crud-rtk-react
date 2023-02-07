@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { useDispatch } from 'react-redux'
-import { addTask } from '../features/tasks/taskSlice'
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from 'react-redux'
+import { addTask, updateTask } from '../features/tasks/taskSlice'
 import { v4 as uuid } from 'uuid'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useParams } from 'react-router-dom'
 
 function TaskForm() {
 
@@ -12,9 +12,11 @@ function TaskForm() {
     //completed: false
   })
 
-  const dispatch = useDispatch()
+  const tasks = useSelector(state => state.tasks)
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const params = useParams()
 
   const handleChange = (e) => {
     setTask({...task, [e.target.name]: e.target.value})
@@ -22,12 +24,27 @@ function TaskForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addTask({
-      id: uuid(), ...task
-    }))
+
+    if(params.id){
+      dispatch(updateTask(task))
+    } else {
+      dispatch(addTask({
+        id: uuid(), ...task
+      }))
+    }
+
     navigate('/')
-    //console.log(task)
   }
+
+  useEffect(() => {
+    if(params.id){
+      console.log("edit")
+      setTask(tasks.find(task => task.id === params.id))
+      //console.log(task)
+    } else {
+      console.log("create")
+    }
+  }, [])
 
   return (
     <div>
