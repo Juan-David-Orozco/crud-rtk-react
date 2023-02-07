@@ -7,7 +7,8 @@ function TaskForm() {
 
   const [task, setTask] = useState({
     title: "",
-    description: ""
+    description: "",
+    //completed: false
   })
 
   const dispatch = useDispatch()
@@ -40,6 +41,13 @@ function TaskForm() {
           onChange={handleChange}
           value={task.description}
         ></textarea>
+        {/*
+        <input 
+          type="checkbox"
+          name="completed"
+          value={task.completed}
+        />
+        */}
         <button>Save</button>
       </form>
     </div>
