@@ -2,7 +2,7 @@
   "name": "crud-rtk-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://juan-david-orozco.github.io/crud-rtk-react",
+  "homepage": "http://Juan-David-Orozco.github.io/crud-rtk-react",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
